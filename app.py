@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- 1. CSS 視覺特效 (Cyber-Amis 風格) ---
+# --- 1. CSS 視覺特效 (Cyber-Amis 風格 - 高對比修正版) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;500;900&display=swap');
@@ -89,7 +89,7 @@ st.markdown("""
         font-family: 'Orbitron';
     }
 
-    /* --- 歌詞卡片：玻璃擬態 (Glassmorphism) --- */
+    /* --- 歌詞卡片：玻璃擬態 --- */
     .lyrics-card {
         background: rgba(255, 255, 255, 0.03);
         backdrop-filter: blur(10px);
@@ -119,15 +119,39 @@ st.markdown("""
         margin-bottom: 20px;
     }
 
-    /* --- 中文歌詞樣式修正 --- */
     .zh-text {
-        font-size: 19px;     /* 稍微加大 */
-        color: #E0E0E0;      /* 改為亮銀白色，對比度更高 */
+        font-size: 19px;
+        color: #E0E0E0;      /* 亮銀白色 */
         line-height: 1.8;
-        font-weight: 400;    /* 稍微加粗 */
+        font-weight: 400;
         border-top: 1px solid rgba(255,255,255,0.2);
         padding-top: 20px;
-        text-shadow: 0 1px 2px rgba(0,0,0,0.8); /* 增加文字陰影，讓字浮出來 */
+        text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+    }
+
+    /* --- 按鈕樣式 (Neon Button) --- */
+    .stButton > button {
+        background-color: transparent;
+        color: #FF4D00;
+        border: 2px solid #FF4D00;
+        border-radius: 50px;
+        font-size: 18px;
+        font-weight: bold;
+        padding: 10px 30px;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        width: 100%;
+    }
+    
+    .stButton > button:hover {
+        background-color: #FF4D00;
+        color: #fff;
+        box-shadow: 0 0 20px #FF4D00, 0 0 40px #FF4D00;
+        border-color: #FF4D00;
+    }
+
+    .stButton > button:active {
+        transform: scale(0.98);
     }
 
     /* --- 關鍵字 Highlight --- */
@@ -154,7 +178,6 @@ st.markdown("""
         20%, 24%, 55% { text-shadow: none; }
     }
     
-    /* --- 音訊播放器美化 --- */
     .stAudio { width: 100%; margin-top: 20px; }
     </style>
 """, unsafe_allow_html=True)
@@ -165,11 +188,11 @@ st.markdown("""
 st.markdown('<div class="neon-title">SAKICIW</div>', unsafe_allow_html=True)
 st.markdown('<div class="artist-tag">詞曲 / 演唱：MALIKAY</div>', unsafe_allow_html=True)
 
-# 佈局：左側視覺(唱片)，右側歌詞
+# 佈局
 col1, col2 = st.columns([1, 1.5])
 
 with col1:
-    # 視覺中心：旋轉唱片
+    # 唱片
     st.markdown("""
         <div style="display:flex; justify-content:center; align-items:center; height:100%; flex-direction:column;">
             <div class="vinyl-container">
@@ -178,14 +201,12 @@ with col1:
             <br>
     """, unsafe_allow_html=True)
     
-    # --- 音訊播放器 ---
+    # 播放器
     audio_file = "sakiciw.m4a"
-    
     if os.path.exists(audio_file):
         st.audio(audio_file, format='audio/mp4') 
     else:
         st.error(f"⚠️ 找不到檔案：{audio_file}")
-        st.info("請確認 'sakiciw.m4a' 已經上傳到與 app.py 同一個資料夾中。")
         
     # 氛圍描述
     st.markdown("""
@@ -198,7 +219,7 @@ with col1:
     """, unsafe_allow_html=True)
 
 with col2:
-    # 歌詞展示區 (已更新阿美語歌詞)
+    # 歌詞
     st.markdown("""
     <div class="lyrics-card">
         <div class="amis-text">
@@ -217,18 +238,18 @@ with col2:
     </div>
     """, unsafe_allow_html=True)
 
-    # 互動按鈕
+    # 互動按鈕 (已修正 CSS 樣式)
     if st.button("🔥 感受這碗湯的溫度 (Feel the Heat)"):
         st.balloons()
         st.markdown("""
-            <div style="text-align:center; font-size:20px; color:#FF4D00; font-weight:bold; margin-top:10px; text-shadow: 0 0 10px #FF4D00;">
-                溫暖直達心坎裡！ (Diheko!)
+            <div style="text-align:center; font-size:24px; color:#FF4D00; font-weight:900; margin-top:15px; text-shadow: 0 0 15px #FF4D00; letter-spacing: 2px;">
+                溫暖直達心坎裡！ (DIHEKO!)
             </div>
         """, unsafe_allow_html=True)
 
-# --- 3. 底部版權 ---
+# --- 3. 底部版權 (已修正顏色) ---
 st.markdown("""
-    <div style="text-align:center; margin-top:50px; color:#444; font-size:12px; border-top:1px solid #222; padding-top:20px;">
+    <div style="text-align:center; margin-top:50px; color:#B0B0B0; font-size:13px; border-top:1px solid #333; padding-top:20px; letter-spacing: 1px;">
         MUSIC APP DESIGN © 2025 | SAKICIW PROJECT
     </div>
 """, unsafe_allow_html=True)

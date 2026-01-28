@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- 1. CSS 視覺特效 (Cyber-Amis 風格 - 高對比修正版) ---
+# --- 1. CSS 視覺特效 (Cyber-Amis 風格 - 手機適配版) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;500;900&display=swap');
@@ -26,12 +26,15 @@ st.markdown("""
 
     /* 隱藏預設元素 */
     header {visibility: hidden;}
-    .block-container {padding-top: 2rem; padding-bottom: 5rem;}
+    .block-container {padding-top: 1rem; padding-bottom: 5rem;} /* 減少頂部留白 */
 
-    /* --- 標題區：霓虹發光特效 --- */
+    /* --- 標題區：智慧縮放霓虹字 (修正手機跳行問題) --- */
     .neon-title {
         font-family: 'Orbitron', sans-serif;
-        font-size: 80px;
+        
+        /* 關鍵修改：使用 clamp 函數，讓字體在 40px 到 80px 之間自動縮放 */
+        font-size: clamp(40px, 13vw, 80px); 
+        
         font-weight: 900;
         text-align: center;
         color: #fff;
@@ -42,16 +45,17 @@ st.markdown("""
             0 0 20px #FF4D00,
             0 0 40px #FF4D00,
             0 0 80px #FF4D00;
-        margin-bottom: 10px;
+        margin-bottom: 5px;
+        line-height: 1.1; /* 避免行距過高 */
         animation: flicker 3s infinite alternate;
     }
     
     .artist-tag {
         text-align: center;
-        font-size: 24px;
+        font-size: 18px; /* 手機版稍微縮小 */
         color: #00E5FF; /* Cyber Cyan */
-        letter-spacing: 5px;
-        margin-bottom: 50px;
+        letter-spacing: 3px;
+        margin-bottom: 30px;
         text-shadow: 0 0 10px #00E5FF;
         font-weight: 300;
     }
@@ -62,8 +66,11 @@ st.markdown("""
         justify_content: center;
         align-items: center;
         margin: 20px auto;
-        width: 300px;
-        height: 300px;
+        
+        /* 讓唱片大小也隨螢幕縮放 */
+        width: clamp(200px, 50vw, 300px);
+        height: clamp(200px, 50vw, 300px);
+        
         border-radius: 50%;
         background: radial-gradient(circle, #111 10%, #333 11%, #000 100%);
         box-shadow: 0 0 30px rgba(255, 77, 0, 0.3);
@@ -73,8 +80,8 @@ st.markdown("""
     }
     
     .vinyl-label {
-        width: 100px;
-        height: 100px;
+        width: 35%;  /* 改用百分比，隨唱片大小變化 */
+        height: 35%;
         background: linear-gradient(135deg, #FF4D00, #FFD600);
         border-radius: 50%;
         position: absolute;
@@ -87,6 +94,7 @@ st.markdown("""
         font-weight: bold;
         color: #000;
         font-family: 'Orbitron';
+        font-size: clamp(12px, 3vw, 16px);
     }
 
     /* --- 歌詞卡片：玻璃擬態 --- */
@@ -96,8 +104,8 @@ st.markdown("""
         -webkit-backdrop-filter: blur(10px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 20px;
-        padding: 40px;
-        margin: 20px 0;
+        padding: 30px; /* 手機版內距縮小一點 */
+        margin: 10px 0;
         text-align: center;
         box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         transition: all 0.5s ease;
@@ -106,13 +114,13 @@ st.markdown("""
     .lyrics-card:hover {
         border-color: #FF4D00;
         box-shadow: 0 0 20px rgba(255, 77, 0, 0.2);
-        transform: scale(1.02);
+        transform: scale(1.01);
     }
 
     .amis-text {
-        font-size: 28px;
+        font-size: 24px; /* 手機閱讀更舒適的大小 */
         font-weight: 700;
-        line-height: 1.6;
+        line-height: 1.5;
         background: linear-gradient(90deg, #fff, #ccc);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -120,9 +128,9 @@ st.markdown("""
     }
 
     .zh-text {
-        font-size: 19px;
+        font-size: 18px;
         color: #E0E0E0;      /* 亮銀白色 */
-        line-height: 1.8;
+        line-height: 1.6;
         font-weight: 400;
         border-top: 1px solid rgba(255,255,255,0.2);
         padding-top: 20px;
@@ -135,12 +143,13 @@ st.markdown("""
         color: #FF4D00;
         border: 2px solid #FF4D00;
         border-radius: 50px;
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
-        padding: 10px 30px;
+        padding: 10px 20px;
         transition: all 0.3s ease;
         text-transform: uppercase;
         width: 100%;
+        margin-top: 10px;
     }
     
     .stButton > button:hover {
@@ -178,7 +187,7 @@ st.markdown("""
         20%, 24%, 55% { text-shadow: none; }
     }
     
-    .stAudio { width: 100%; margin-top: 20px; }
+    .stAudio { width: 100%; margin-top: 15px; }
     </style>
 """, unsafe_allow_html=True)
 
@@ -210,7 +219,7 @@ with col1:
         
     # 氛圍描述
     st.markdown("""
-        <div style="text-align:center; margin-top:30px; color:#aaa; font-size:14px;">
+        <div style="text-align:center; margin-top:20px; color:#aaa; font-size:13px;">
             <span style="color:#FF4D00">●</span> 溫暖 (Diheko) &nbsp;&nbsp;
             <span style="color:#00E5FF">●</span> 幸福 (Malemed) &nbsp;&nbsp;
             <span style="color:#FFD600">●</span> 香氣 (Fangsis)
@@ -238,18 +247,18 @@ with col2:
     </div>
     """, unsafe_allow_html=True)
 
-    # 互動按鈕 (已修正 CSS 樣式)
+    # 互動按鈕
     if st.button("🔥 感受這碗湯的溫度 (Feel the Heat)"):
         st.balloons()
         st.markdown("""
-            <div style="text-align:center; font-size:24px; color:#FF4D00; font-weight:900; margin-top:15px; text-shadow: 0 0 15px #FF4D00; letter-spacing: 2px;">
+            <div style="text-align:center; font-size:20px; color:#FF4D00; font-weight:900; margin-top:10px; text-shadow: 0 0 15px #FF4D00; letter-spacing: 1px;">
                 溫暖直達心坎裡！ (DIHEKO!)
             </div>
         """, unsafe_allow_html=True)
 
-# --- 3. 底部版權 (已修正顏色) ---
+# --- 3. 底部版權 ---
 st.markdown("""
-    <div style="text-align:center; margin-top:50px; color:#B0B0B0; font-size:13px; border-top:1px solid #333; padding-top:20px; letter-spacing: 1px;">
+    <div style="text-align:center; margin-top:40px; color:#B0B0B0; font-size:12px; border-top:1px solid #333; padding-top:15px; letter-spacing: 1px;">
         MUSIC APP DESIGN © 2025 | SAKICIW PROJECT
     </div>
 """, unsafe_allow_html=True)

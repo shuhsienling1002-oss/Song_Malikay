@@ -232,7 +232,7 @@ with col2:
     st.markdown("""
     <div class="lyrics-card">
         <div class="amis-text">
-            Fengiw sako <span class="highlight">fangsis</span> a maledef i taliyok,<br>
+            Fengiwsa ko <span class="highlight">fangsis</span> a maledef i taliyok,<br>
             mira'oy to <span class="highlight">kiciw</span> cecayay a kaysing,<br><br>
             o satada <span class="highlight">malemeday</span> a malemed,<br>
             o saka <span class="highlight">diheko</span> mahinom ko faloco' i kasienawan,<br>
@@ -262,3 +262,4 @@ st.markdown("""
         MUSIC APP DESIGN © 2025 | SAKICIW PROJECT
     </div>
 """, unsafe_allow_html=True)
+

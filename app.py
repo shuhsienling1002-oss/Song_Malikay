@@ -9,7 +9,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# --- 1. CSS 視覺特效 (維持 Cyber-Amis 風格) ---
+# --- 1. CSS 視覺特效 (Cyber-Amis 風格) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;500;900&display=swap');
@@ -119,13 +119,15 @@ st.markdown("""
         margin-bottom: 20px;
     }
 
+    /* --- 中文歌詞樣式修正 --- */
     .zh-text {
-        font-size: 18px;
-        color: #8892b0;
+        font-size: 19px;     /* 稍微加大 */
+        color: #E0E0E0;      /* 改為亮銀白色，對比度更高 */
         line-height: 1.8;
-        font-weight: 300;
-        border-top: 1px solid rgba(255,255,255,0.1);
+        font-weight: 400;    /* 稍微加粗 */
+        border-top: 1px solid rgba(255,255,255,0.2);
         padding-top: 20px;
+        text-shadow: 0 1px 2px rgba(0,0,0,0.8); /* 增加文字陰影，讓字浮出來 */
     }
 
     /* --- 關鍵字 Highlight --- */
@@ -176,11 +178,10 @@ with col1:
             <br>
     """, unsafe_allow_html=True)
     
-    # --- 音訊播放器 (已針對 .m4a 調整) ---
-    audio_file = "sakiciw.m4a"  # 這裡改成了 .m4a
+    # --- 音訊播放器 ---
+    audio_file = "sakiciw.m4a"
     
     if os.path.exists(audio_file):
-        # format='audio/mp4' 是播放 m4a 的標準 MIME type
         st.audio(audio_file, format='audio/mp4') 
     else:
         st.error(f"⚠️ 找不到檔案：{audio_file}")
@@ -197,7 +198,7 @@ with col1:
     """, unsafe_allow_html=True)
 
 with col2:
-    # 歌詞展示區
+    # 歌詞展示區 (已更新阿美語歌詞)
     st.markdown("""
     <div class="lyrics-card">
         <div class="amis-text">
@@ -231,4 +232,3 @@ st.markdown("""
         MUSIC APP DESIGN © 2025 | SAKICIW PROJECT
     </div>
 """, unsafe_allow_html=True)
-

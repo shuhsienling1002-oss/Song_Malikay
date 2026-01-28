@@ -234,7 +234,7 @@ with col2:
         <div class="amis-text">
             Fengiwsa ko <span class="highlight">fangsis</span> a maledef i taliyok,<br>
             mira'oy to <span class="highlight">kiciw</span> cecayay a kaysing,<br><br>
-            o satada <span class="highlight">malemeday</span> a malemed,<br>
+            o <span class="highlight">satadamalemeday</span> a malemed,<br>
             o saka <span class="highlight">diheko</span> mahinom ko faloco' i kasienawan,<br>
             dada ! layapen ko cecay a kiciw a mikohaw.
         </div>
@@ -262,4 +262,5 @@ st.markdown("""
         MUSIC APP DESIGN © 2025 | SAKICIW PROJECT
     </div>
 """, unsafe_allow_html=True)
+
 

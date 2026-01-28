@@ -1,16 +1,15 @@
 import streamlit as st
 import os
-import base64
 
 # --- 0. 系統配置 ---
 st.set_page_config(
     page_title="Sakiciw - 香雞酒",
     page_icon="🍲",
-    layout="wide", # 使用寬螢幕模式以展現氣勢
+    layout="wide",
     initial_sidebar_state="collapsed"
 )
 
-# --- 1. CSS 視覺特效 (Cyber-Amis 風格) ---
+# --- 1. CSS 視覺特效 (維持 Cyber-Amis 風格) ---
 st.markdown("""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Noto+Sans+TC:wght@300;500;900&display=swap');
@@ -177,12 +176,15 @@ with col1:
             <br>
     """, unsafe_allow_html=True)
     
-    # 音訊播放器
-    audio_file = "sakiciw.mp3"
+    # --- 音訊播放器 (已針對 .m4a 調整) ---
+    audio_file = "sakiciw.m4a"  # 這裡改成了 .m4a
+    
     if os.path.exists(audio_file):
-        st.audio(audio_file, format='audio/mp3')
+        # format='audio/mp4' 是播放 m4a 的標準 MIME type
+        st.audio(audio_file, format='audio/mp4') 
     else:
-        st.warning("🎵 請將音檔命名為 'sakiciw.mp3' 並放入資料夾中")
+        st.error(f"⚠️ 找不到檔案：{audio_file}")
+        st.info("請確認 'sakiciw.m4a' 已經上傳到與 app.py 同一個資料夾中。")
         
     # 氛圍描述
     st.markdown("""
@@ -214,14 +216,11 @@ with col2:
     </div>
     """, unsafe_allow_html=True)
 
-    # 互動按鈕：感受溫度
+    # 互動按鈕
     if st.button("🔥 感受這碗湯的溫度 (Feel the Heat)"):
         st.balloons()
         st.markdown("""
-            <script>
-            // 這裡可以加更複雜的 JS 特效，但在 Streamlit 純 Python 模式下，Balloons 是最直接的慶祝效果
-            </script>
-            <div style="text-align:center; font-size:20px; color:#FF4D00; font-weight:bold; margin-top:10px;">
+            <div style="text-align:center; font-size:20px; color:#FF4D00; font-weight:bold; margin-top:10px; text-shadow: 0 0 10px #FF4D00;">
                 溫暖直達心坎裡！ (Diheko!)
             </div>
         """, unsafe_allow_html=True)
